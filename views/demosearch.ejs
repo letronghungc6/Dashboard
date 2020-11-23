@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Index</title>
+  <link rel="stylesheet" href="/stylesheets/1.css" />
+</head>
+<body>
+  <!--  -->
+  <div class="container">
+    <form method="GET" action="/demosearch">
+    <input type="text" id="search" name="tenmonan" placeholder="Nhập tên" onkeyup="searchData()">
+    <button title="Submit" type="submit" onkeyup="searchData()">Reset</button>
+    <hr>
+        
+    </form>
+  
+  <!-- Danh sách dữ liệu -->
+      <!-- <span>
+        
+      </span> -->
+
+      <table id="data" style="margin-left: 30px;">
+        
+    </table>
+  </div>
+  <script>
+    //Hàm gọi API 
+    function loadData() {
+      //Nội dung
+      var data = "";
+      // fetch API 
+      fetch("https://jsonplaceholder.typicode.com/users")
+        .then(
+          function (response) {
+            if (response.status !== 200) {
+              console.log('Lỗi, mã lỗi ' + response.status);
+              return;
+            }
+            response.json().then(result => {
+              result.forEach(user => {
+                //lấy giá trị
+                let a = user.name;
+                let b = user.username;
+                data += `
+                <tr>
+                    <td style="border: 1px solid black;">
+                        <p>
+                        ${b}
+                        </p>
+                    </td>
+                    <td style="border: 1px solid black;">
+                        <p>
+                        ${a}
+                    </p>
+                    </td>
+                </tr>
+              `;
+              });
+              document.getElementById("data").innerHTML = data;
+            });
+          })
+        .catch(err => {
+          console.log('Error :-S', err)
+        });
+    }
+    //gọi lại hàm khi trang web load lần đầu
+    loadData();
+
+    var search = document.getElementById("search");
+    function searchData() {
+      var filter, table, tr, td, i;
+      // lấy giá trị người dùng nhập
+      filter = search.value.toUpperCase();
+      table = document.getElementById("data");
+      tr = table.getElementsByTagName("tr");
+      // Nếu filter không có giá trị thì ẩn phần kết qủa
+      if (!filter) {
+        table.style.display = "none";
+      }
+      else {
+        // lặp qua tất cả các thẻ tr chứa kết quả
+        for (i = 0; i < tr.length; i++) {
+          // lấy thẻ p trong các thẻ tr
+          td = tr[i].getElementsByTagName("p")[0];
+          // kiểm tra giá trị nhập có tôn tại trong nội dung thẻ td
+          if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            //nếu có hiển thị phàn tử data và các thẻ tr đó
+            table.style.display = "block";
+            tr[i].style.display = "";
+          } 
+          else {
+            // nếu không ẩn các thẻ tr
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
+    //gán sự kiện cho thẻ input
+  </script>
+
+
+</body>
+
+</html>

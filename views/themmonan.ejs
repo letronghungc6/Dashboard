@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="fa/css/all.css">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <link rel="stylesheet" href="stylesheets/adddata.css">
+</head>
+
+<body>
+    <div class="cha">
+
+        <!-- menu  -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+
+                    <li class="nav-item active">
+                        <a class="nav-link" href="http://localhost:3000/">Trang chủ <span
+                                class="sr-only">(current)</span></a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Nội dung
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <button type="button" class="dropdown-item" onclick="monan()">Món ăn</button>
+                            <button type="button" class="dropdown-item" onclick="thanhphan()">Thành phần</button>
+                            <input type="text" id="token" name="token" value="<%-token%>" style="display: none;">
+                            <input type="text" id="phone" name="phone" value="<%-phone%>" style="display: none;">
+                        </div>
+                    </li>
+
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Tìm kiếm" aria-label="Search">
+                    <a href="/logout"><button class="btn btn-outline-success my-2 my-sm-0" type="button"
+                            id="logout">Đăng
+                            xuất</button></a>
+                </form>
+            </div>
+        </nav>
+        <!-- form nhap lieu -->
+        <form action="" method="" name="postmonan" id="postapi">
+            <div class="nhapdulieu">
+
+                <label for="tenmonan">Tên món ăn:</label>
+                <textarea name="tenmonan" id="tenmonan" cols="20" rows="2"></textarea>
+                <br>
+                <label for="mota">Mô Tả:</label>
+                <textarea name="mota" id="mota" cols="20" rows="3"></textarea>
+                
+                <br>
+                
+                
+                <div class="nhapthanhphanchinh">
+                    <label for="nguyenlieuchinh">Nguyên liệu chính:</label>
+                    <textarea name="nguyenlieuchinh" id="nguyenlieuchinh" cols="20" rows="1"></textarea>
+                    <button type="button" onclick="danhap()" class="nutok">Nhập</button>
+                </div>
+                <br>
+
+                <div class="nhapnguyenlieu">
+                    <label for="loainuyenlieu">Nhập nguyên liệu:</label>
+                    <table border="1">
+                        <tr>
+                            <th class="bangnhap">Loại</th>
+                            <th class="bangnhap">Số lượng</th>
+                        </tr>
+
+                    </table>
+                    <textarea name="nguyenlieu" id="nguyenlieu" cols="20" rows="1"></textarea>
+                    <textarea class="settext" name="soluongnguyenlieu" id="soluongnguyenlieu" cols="20" rows="1"></textarea>
+                    <button type="button" onclick="danhap1()" class="nutok">Nhập</button>
+                </div>
+                <div class="nhapgiavi">
+                    <label for="giavi">Nhập gia vị:</label>
+                    <table border="1">
+                        <tr>
+                            <th class="bangnhap">Gia vị</th>
+                            <th class="bangnhap">Số Lượng</th>
+                        </tr>
+                    </table>
+                    <textarea name="giavi" id="giavi" cols="20" rows="1"></textarea>
+                    <textarea class="settext" name="soluonggiavi" id="soluonggiavi" cols="20" rows="1"></textarea>
+                    <button type="button" onclick="danhap2()" class="nutok">Nhập</button>
+
+                </div>
+                <div class="nhapbuocnau">
+                    <label for="buoc">Nhập bước nấu:</label>
+                    <table border="1">
+                        <tr>
+                            <th class="bangnhap">Bước nấu</th>
+                            <th class="bangnhap">Thời gian</th>
+                        </tr>
+                    </table>
+                    <textarea name="buoc" id="buoc" cols="20" rows="4"></textarea>
+                    <textarea class="settext" name="thoigian" id="thoigian" cols="20" rows="4"></textarea>
+                    <div class="themanhmonan">
+                        <input class="setinput" type="text" id="anhmonan" name="anhmonan" placeholder="Nhập id ảnh món ăn">
+                        <br>
+                        <input class="setinput" type="text" id="linkmonan">
+                        <div id="anh2"></div>
+                        <div class="set">
+                            <button type="button" onclick="getlink()" class="getlink">Lấy link</button>
+                            <button type="button" onclick="danhap3()" class="nutok2">Nhập</button></div>
+                        
+                    </div>
+
+                    <br>
+                    <div class="themanhchinh">
+                        <input class="setinput" type="text" id="idanhchinh" name="idanhchinh" placeholder="Nhập id ảnh chính">
+                        <br>
+                        <input class="setinput" type="text" id="linkanh"  >
+                        <div id="anh">
+
+                        </div>
+                        <button type="button" onclick="laylink()" class="getlink">Lấy link</button>
+                    </div>
+
+                    <div class="select">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Chế độ:</label>
+                            <select class="form-control" id="exampleFormControlSelect1">
+                                <option class="chedo" name="chedo" value="Chay">Chay</option>
+                                <option class="chedo" name="chedo" value="Mặn">Mặn</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Vùng miền:</label>
+                            <select class="form-control" id="exampleFormControlSelect2">
+                                <option class="vungmien" name="vungmien" value="All">All</option>
+                                <option class="vungmien" name="vungmien" value="Bắc">Bắc</option>
+                                <option class="vungmien" name="vungmien" value="Trung">Trung</option>
+                                <option class="vungmien" name="vungmien" value="Nam">Nam</option>
+
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Độ tuổi:</label>
+                            <select class="form-control" id="exampleFormControlSelect3">
+                                <option class="dotuoi" value="All">All</option>
+                                <option class="dotuoi" value="Trẻ em">Trẻ em</option>
+                                <option class="dotuoi" value="Người lớn">Người lớn</option>
+                                <option class="dotuoi" value="Người già">Người già</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+                <button type="submit" id="nutthem" onclick="uio()">Thêm dữ liệu</button>
+            </div>
+
+
+            <div class="hienthi">
+                <div class="hienthinguyenlieuchinh">
+                    <table border="1">
+                        <thead>
+                            <tr>
+                                <th>Lần nhập</th>
+                                <th>Tên nguyên liệu
+                            </tr>
+                            </tr>
+                        </thead>
+
+                        <tbody id=danhsachnguyenlieuchinh>
+
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" onclick="xoahet()" class="xoadulieu">Xóa hết</button>
+                <div class="hienthinguyenlieu">
+                    <table border="1">
+                        <thead>
+                            <tr>
+                                <th>Lần nhập</th>
+                                <th>Loại</th>
+                                <th>Số lượng</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id=danhsachnguyenlieu>
+
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" onclick="xoahet1()" class="xoadulieu">Xóa hết</button>
+                <div class="hienthigiavi">
+                    <table border="1">
+                        <thead>
+                            <tr>
+                                <th>Lần nhập</th>
+                                <th>Gia vị</th>
+                                <th>Số lượng</th>
+                            </tr>
+                        </thead>
+                        <tbody id="danhsachgiavi">
+
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" onclick="xoahet2()" class="xoadulieu">Xóa hết</button>
+                <div class="hienthicachnau">
+                    <table border="1" class="bang">
+                        <thead>
+                            <tr>
+                                <th class="setbanghienthi">Lần nhập</th>
+                                <th class="setbanghienthi">Bước nấu</th>
+                                <th class="setbanghienthi">Thời gian</th>
+                                <th class="setbanghienthi">Hình ảnh</th>
+                            </tr>
+                        </thead>
+                        <tbody id="danhsachcachnau">
+
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" onclick="xoahet3()" class="xoadulieu">Xóa hết</button>
+            </div>
+
+
+        </form>
+    </div>
+
+
+
+    <script>
+
+        var token = document.getElementById("token").value;
+        var spiceFood = [];
+        var componentFood = [];
+        var step = [];
+        var component = [];
+        function food(name, mode, region, age, imageFoods, description, componentFoods, spiceFoods, steps, components) {
+            this.name = name;
+            this.mode = mode;
+            this.region = region;
+            this.age = age;
+            this.imageFoods = imageFoods;
+            this.description = description;
+            this.componentFoods = componentFoods;
+            this.spiceFoods = spiceFoods;
+            this.steps = steps;
+            this.components = components;
+
+        }
+
+        document.getElementById('postapi').addEventListener('nutthem', uio);
+        function uio() {
+            event.preventDefault();
+            var name = document.getElementById('tenmonan').value;
+            var imageFoods = document.getElementById('linkanh').value;
+            var description = document.getElementById('mota').value;
+            var components = document.getElementById('')
+
+            var chedo = document.getElementById("exampleFormControlSelect1");
+            var mode = chedo.options[chedo.selectedIndex].value;
+
+            var tuoi = document.getElementById("exampleFormControlSelect3");
+            var age = tuoi.options[tuoi.selectedIndex].value;
+
+            var mien = document.getElementById("exampleFormControlSelect2");
+            var region = mien.options[mien.selectedIndex].value;
+            var x = new food(name, mode, region, age, imageFoods, description, componentFood, spiceFood, step, component);
+
+            const postdata = {
+                "name": name,
+                "imageFoods": imageFoods,
+                "description": description,
+                "mode": mode,
+                "age": age,
+                "region": region,
+                "componentFoods": component,
+                "spiceFoods": spiceFood,
+                "components": componentFood,
+                "steps": step
+
+            };
+
+            const header = {
+                headers: {
+                    // 'Accept': 'application/json', 'content-type': 'application/json; charset=UTF-8'
+                    'Accept': '/',
+                    'Content-Type': 'application/json',
+                    'token': token
+                },
+                body: JSON.stringify(postdata),
+                method: "POST",
+                mode: "cors"
+            };
+
+            fetch("https://easycook37.herokuapp.com/pushFood", header)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (result) {
+                    console.log(result);
+                    window.location = `http://localhost:3000/dulieu?token=${token}&phone=${phone}`;
+                })
+                .catch(function (error) {
+                    console.log('Request failed', error);
+                });
+
+            console.log(x);
+
+        }
+
+
+
+
+        var buocnhap0 = 0;
+        var buocnhap = 0;
+        var buocnhap1 = 0;
+        var buocnhap2 = 0;
+        var idCre = 0;
+        function componentFoods(name, numberOfComponent) {
+            this.name = name;
+            this.numberOfComponent = numberOfComponent;
+        }
+        function spiceFoods(name, numberOfSpice) {
+            this.name = name;
+            this.numberOfSpice = numberOfSpice;
+        }
+        function steps(step, description, time, imageData) {
+            this.step = step;
+            this.description = description;
+            this.time = time;
+            this.imageData = imageData;
+        }
+        function danhap() {
+
+            var nlchinh = document.getElementById('nguyenlieuchinh').value;
+            var table = document.getElementById("danhsachnguyenlieuchinh");
+            var row1 = table.insertRow(-1);
+            var cell1 = row1.insertCell(0);
+            var cell2 = row1.insertCell(1);
+            cell1.innerHTML = `<td >${buocnhap0} </td>`;
+            cell2.innerHTML = `<td>${nlchinh} </td>`;
+            buocnhap0++;
+            var componentFood1 = nlchinh;
+            componentFood.push(componentFood1);
+        }
+
+
+        function xoahet() {
+            list12 = "";
+            document.getElementById("danhsachnguyenlieuchinh").innerHTML = list12;
+        }
+
+        function danhap1() {
+            var loai = document.getElementById('nguyenlieu').value;
+            var sl = document.getElementById('soluongnguyenlieu').value;
+
+            var table = document.getElementById("danhsachnguyenlieu");
+            var row1 = table.insertRow(-1);
+            var cell1 = row1.insertCell(0);
+            var cell2 = row1.insertCell(1);
+            var cell3 = row1.insertCell(2);
+            cell1.innerHTML = `<td>${buocnhap} </td>`;
+            cell2.innerHTML = `<td>${loai} </td>`;
+            cell3.innerHTML = `<td>${sl} </td>`;
+            buocnhap++;
+            var component1 = new componentFoods(loai, sl)
+            component.push(component1);
+            // loaddanhsach();
+        }
+
+        function xoahet1() {
+            list12 = "";
+            document.getElementById("danhsachnguyenlieu").innerHTML = list12;
+        }
+
+        function danhap2() {
+            var loaigiavi = document.getElementById('giavi').value;
+            var slgiavi = document.getElementById('soluonggiavi').value;
+
+            var table = document.getElementById('danhsachgiavi');
+            var row1 = table.insertRow(-1);
+            var cell1 = row1.insertCell(0);
+            var cell2 = row1.insertCell(1);
+            var cell3 = row1.insertCell(2);
+            cell1.innerHTML = `<td>${buocnhap1} </td>`;
+            cell2.innerHTML = `<td >${loaigiavi} </td>`;
+            cell3.innerHTML = `<td >${slgiavi} </td>`;
+            buocnhap1++;
+            var spice1 = new spiceFoods(loaigiavi, slgiavi);
+            spiceFood.push(spice1);
+            // console.log(spiceFood);
+
+        }
+        function xoahet2() {
+            list12 = "";
+            document.getElementById("danhsachgiavi").innerHTML = list12;
+        }
+
+        // <input type="text" id="idanh" name="idanh" placeholder="Nhập id ảnh ở đây">
+        function danhap3() {
+            idCre += 1;
+            buocnau = document.getElementById('buoc').value;
+            thoigiannau = document.getElementById('thoigian').value;
+            anh = document.getElementById('linkmonan').value;
+            var table = document.getElementById('danhsachcachnau');
+            var row1 = table.insertRow(-1);
+            var cell1 = row1.insertCell(0);
+            var cell2 = row1.insertCell(1);
+            var cell3 = row1.insertCell(2);
+            var cell4 = row1.insertCell(3);
+            cell1.innerHTML = `<td >${buocnhap2} </td>`;
+            cell2.innerHTML = `<td >${buocnau} </td>`;
+            cell3.innerHTML = `<td >${thoigiannau} </td>`;
+            cell4.innerHTML = `<td >${anh}</td>`;
+            // cell4.innerHTML = "<td ><div id='myanh" + idCre + "'> <input id='idanh" + idCre + "' placeholder='Nhập id ảnh ở đây'><br><button onclick='xyz(" + idCre + ")'>check</button>  </div></td>";
+            buocnhap2++;
+            var step1 = new steps(buocnhap2, buocnau, thoigiannau, anh);
+            step.push(step1);
+            // var photoId = document.getElementById("idanh" + idCre).value;
+            // var flickrService = new FlickrService()
+            // flickrService.getPhotoInfo(photoId, function (photo) {
+            //   var imageData = photo.imageURL;
+            //   var a = document.getElementById("myanh" + idCre);
+            //   var inp = document.createElement("input");
+            //   var val = document.createAttribute("value");
+            //   var att = document.createAttribute("class");
+            //   att.value = "inp" + idCre;
+            //   val.value = imageData;
+            //   inp.setAttributeNode(att);
+            //   inp.setAttributeNode(val);
+            //   // inp.innerHTML=imageData;
+
+            // });
+            // //await console.log(imageData)
+            // setTimeout(function(){
+            //   var imageData= "";
+            //   var step1 = new steps(buocnhap2, buocnau, thoigiannau, imageData);
+            //   step.push(step1);
+            // },3000)
+        }
+
+        function xoahet3() {
+            list12 = "";
+            document.getElementById("danhsachcachnau").innerHTML = list12;
+        }
+        // var saubuocnhap,buocnau, thoigiannau, imageData = "";
+
+        // function xyz(idK) {
+        //   var photoId = document.getElementById("idanh" + idK).value;
+        //   var flickrService = new FlickrService()
+        //   flickrService.getPhotoInfo(photoId, function (photo) {
+        //     var mageData = photo.imageURL;
+        //     var a = document.getElementById("myanh" + idK);
+        //     var inp = document.createElement("input");
+        //     var val = document.createAttribute("value");
+        //     var att = document.createAttribute("class");
+        //     att.value = "inp" + idK;
+        //     val.value = imageData;
+        //     inp.setAttributeNode(att);
+        //     inp.setAttributeNode(val);
+        //     // inp.innerHTML=imageData;
+        //     a.appendChild(inp);  
+        //   });
+        //await console.log(imageData)
+        // setTimeout(function(){
+        //   var step1 = new steps(buocnhap2, buocnau, thoigiannau, imageData);
+        //   step.push(step1);
+        // },3000)
+        // }
+
+
+
+        function laylink() {
+            var photoId = document.getElementById("idanhchinh").value;
+            var flickrService = new FlickrService();
+            flickrService.getPhotoInfo(photoId, function (photo) {
+                var linkanh = photo.imageURL;
+                document.getElementById("linkanh").value = linkanh;
+
+                var anh = `
+                 <img src="${linkanh}" alt="" width="200px" height="200px"> 
+                `;
+                document.getElementById("anh").innerHTML = anh;
+            });
+        }
+        function getlink() {
+            var photoId = document.getElementById("anhmonan").value;
+            var flickrService = new FlickrService();
+            flickrService.getPhotoInfo(photoId, function (photo) {
+                var linkanh2 = photo.imageURL;
+                document.getElementById("linkmonan").value = linkanh2;
+                var anh = `
+                 <img src="${linkanh2}" alt="" width="200px" height="200px"> 
+                `;
+                document.getElementById("anh2").innerHTML = anh;
+            });
+        }
+
+        function FlickrPhoto(title, owner, flickrURL, imageURL) {
+            this.title = title;
+            this.owner = owner;
+            this.flickrURL = flickrURL;
+            this.imageURL = imageURL;
+        }
+        function FlickrService() {
+            this.flickrApiKey = "865280953f08e24f6ceff3ce461e9bf2";
+            this.flickrGetInfoURL = "https://api.flickr.com/services/rest/?method=flickr.photos.getInfo&nojsoncallback=1&format=json";
+
+            this.getPhotoInfo = function (photoId, callback) {
+                var ajaxOptions = {
+                    type: 'GET',
+                    url: this.flickrGetInfoURL,
+                    data: { api_key: this.flickrApiKey, photo_id: photoId },
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.stat == "ok") {
+                            var photo = data.photo;
+                            var photoTitle = photo.title._content;
+                            var photoOwner = photo.owner.realname;
+                            var photoWebURL = photo.urls.url[0]._content;
+                            var photoStaticURL = "https://farm" + photo.farm + ".staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + "_b.jpg";
+                            var flickrPhoto = new FlickrPhoto(photoTitle, photoOwner, photoWebURL, photoStaticURL);
+                            callback(flickrPhoto);
+                        }
+                    }
+                };
+
+                $.ajax(ajaxOptions);
+            }
+        }
+
+        function thanhphan() {
+            window.location = `http://localhost:3000/thanhphan?token=${token}&phone=${phone}`;
+        }
+        function monan() {
+            window.location = `http://localhost:3000/dulieu?token=${token}&phone=${phone}`;
+        }
+
+    </script>
+
+</body>
+
+</html>

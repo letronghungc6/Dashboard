@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Dữ liệu</title>
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="fa/css/all.css">
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
+  <!-- <script src="javascripts/search.js"></script> -->
+
+  <link rel="stylesheet" href="stylesheets/1.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Trang chủ <span class="sr-only">(current)</span></a>
+          <!-- Sửa -->
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Nội dung
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <button type="button" class="dropdown-item" onclick="monan()">Món ăn</button>
+            <button type="button" class="dropdown-item" onclick="thanhphan()">Thành phần</button>
+          </div>
+        </li>
+        <button id="nut" type="button" onclick="themmoi()">Thêm mới</button>
+        <input type="text" id="token" name="token" value="<%-token%>" style="display: none;">
+        <input type="text" id="phone" name="phone" value="<%-phone%>" style="display: none;">
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input id="search" class="form-control mr-sm-2" type="search" placeholder="Nhập món ăn" aria-label="Search"
+          onkeyup="searchData()">
+      </form>
+      <a href="/logout"><button class="btn btn-outline-success my-2 my-sm-0" type="button" id="logout" >Đăng
+        xuất</button></a>
+    </div>
+  </nav>
+  <div id="container">
+
+    <table class="table table-light">
+      <thead>
+        <tr>
+          <td id="checkbox"><input type="checkbox" name="" id="check" autocomplete="off"></td>
+          <td><strong>Tên</strong></td>
+          <td><strong>Nguyên liệu chính</strong></td>
+          <td><strong>Chế độ</strong></td>
+          <td><strong>Tuổi</strong></td>
+          <td><strong>Miền</strong></td>
+          <td id="cuoi"><strong>Chức năng</strong></td>
+        </tr>
+      </thead>
+      <tbody id="data">
+
+        <!-- <tr>
+              <td id="checkbox"><input type="checkbox" name="" id="check" autocomplete="off"></td>
+              <td><a>Bắp cải xào tôm</a></td>
+              <td>Bắp cải, tôm</td>
+
+              <td>Mặn</td>
+              <td>Mọi lứa tuổi</td>
+              <td>3 miền</td>
+              <td id="cuoi">
+                <button>Chi tiết</button>
+                <button>Xóa</button>
+              </td>
+            </tr>
+            <tr>
+              <td id="checkbox"><input type="checkbox" name="" id="check" autocomplete="off"></td>
+              <td><a>Gỏi bắp cải mề gà</a></td>
+              <td>Bắp cải,Mề gà</td>
+              <td>Mặn</td>
+              <td>Mọi lứa tuổi</td>
+              <td>3 miền</td>
+              <td id="cuoi">
+                <button>Chi tiết</button>
+                <button>Xóa</button>
+              </td>
+            </tr>
+            <tr>
+              <td id="checkbox"><input type="checkbox" name="" id="check" autocomplete="off"></td>
+              <td><a>Canh bắp cải cuộn thịt heo</a></td>
+              <td>Thịt heo, bắp cải</td>
+              <td>Mặn</td>
+              <td>Mọi lứa tuổi</td>
+              <td>3 miền</td>
+              <td id="cuoi">
+                <button>Chi tiết</button>
+                <button>Xóa</button>
+              </td>
+            </tr>
+            <tr>
+              <td id="checkbox"><input type="checkbox" name="" id="check" autocomplete="off"></td>
+              <td><a>Cơm Súp Lơ</a></td>
+              <td>Súp lơ</td>
+              <td>Chay</td>
+              <td>Mọi lứa tuổi</td>
+              <td>3 miền</td>
+              <td id="cuoi">
+                <button>Chi tiết</button>
+                <button>Xóa</button>
+              </td>
+            </tr>
+            <tr>
+              <td id="checkbox"><input type="checkbox" name="" id="check" autocomplete="off"></td>
+              <td><a>Súp lơ xào nấm</a></td>
+              <td>Súp lơ,Nấm</td>
+              <td>Chay</td>
+              <td>Mọi lứa tuổi</td>
+              <td>3 miền</td>
+              <td id="cuoi">
+                <button>Chi tiết</button>
+                <button>Xóa</button>
+              </td>
+            </tr>
+            <tr>
+              <td id="checkbox"><input type="checkbox" name="" id="check" autocomplete="off"></td>
+              <td><a>Bông cải chiên giòn</a></td>
+              <td>Bông cải</td>
+              <td>Chay</td>
+              <td>Mọi lứa tuổi</td>
+              <td>3 miền</td>
+              <td id="cuoi">
+                <button>Chi tiết</button>
+                <button>Xóa</button>
+              </td>
+            </tr>
+            <tr>
+              <td id="checkbox"><input type="checkbox" name="" id="check" autocomplete="off"></td>
+              <td><a>Lòng gà xào bông cải</a></td>
+              <td>Bông cải,Lòng gà</td>
+              <td>Mặn</td>
+              <td>Mọi lứa tuổi</td>
+              <td>3 miền</td>
+              <td id="cuoi">
+                <button>Chi tiết</button>
+                <button>Xóa</button>
+              </td>
+            </tr>
+            <tr>
+              <td id="checkbox"><input type="checkbox" name="" id="check" autocomplete="off"></td>
+              <td><a>Cải thìa xào trứng</a></td>
+              <td>Cải thìa,Trứng</td>
+              <td>Mặn</td>
+              <td>Mọi lứa tuổi</td>
+              <td>3 miền</td>
+              <td id="cuoi">
+                <button>Chi tiết</button>
+                <button>Xóa</button>
+              </td>
+            </tr>
+            <tr>
+              <td id="checkbox"><input type="checkbox" name="" id="check" autocomplete="off"></td>
+              <td><a>Thịt nhồi cải thìa</a></td>
+              <td>Thịt heo,Cải thìa</td>
+              <td>Mặn</td>
+              <td>Mọi lứa tuổi</td>
+              <td>3 miền</td>
+              <td id="cuoi">
+                <button>Chi tiết</button>
+                <button>Xóa</button>
+              </td>
+            </tr>
+            <tr>
+              <td id="checkbox"><input type="checkbox" name="" id="check" autocomplete="off"></td>
+              <td><a>Cải xoong xào thịt băm</a></td>
+              <td>Cải xoong,Thịt băm</td>
+              <td>Mặn</td>
+              <td>Mọi lứa tuổi</td>
+              <td>3 miền</td>
+              <td id="cuoi">
+                <button>Chi tiết</button>
+                <button>Xóa</button>
+              </td>
+            </tr> -->
+      </tbody>
+    </table>
+  </div>
+  </div>
+
+  <script>
+    var search = document.getElementById("search");
+    function searchData() {
+      var filter, table, tr, td, i;
+      // lấy giá trị người dùng nhập
+      filter = search.value.toUpperCase();
+      table = document.getElementById("data");
+      tr = table.getElementsByTagName("tr");
+      // Nếu filter không có giá trị thì ẩn phần kết qủa
+      if (!filter) {
+        table.style.display = "";
+        for (i = 0; i < tr.length; i++) {
+          tr[i].style.display = "";
+        }
+      }
+      else {
+        // lặp qua tất cả các thẻ tr chứa kết quả
+        for (i = 0; i < tr.length; i++) {
+          // lấy thẻ td trong các thẻ tr
+          td = tr[i].getElementsByTagName("a")[0];
+          // kiểm tra giá trị nhập có tôn tại trong nội dung thẻ td
+          if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            //nếu có hiển thị phàn tử data và các thẻ tr đó
+            table.style.display = "";
+            tr[i].style.display = "";
+          }
+          else {
+            // nếu không ẩn các thẻ tr
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
+    var token = document.getElementById("token").value;
+    var phone = document.getElementById("phone").value;
+    function loadData() {
+      var data = "";
+      const header = {
+        headers: {
+          'Accept': '*/*',
+          'Content-Type': 'application/json',
+          'token': token
+        },
+        method: "GET",
+        mode: "cors"
+      };
+      fetch("https://easycook37.herokuapp.com/homeFood", header)
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (result) {
+          result.data.forEach(function (user) {
+            let name = user.name;
+            let mode = user.mode;
+            let age = user.age;
+            let region = user.region;
+            let components = user.components;
+            let id = user.id;
+            data += `
+                    <tr>
+              <td id="checkbox"><input type="checkbox" name="" id="check" autocomplete="off"></td>
+              <td><a>${name}</a></td>
+              <td>${components}</td>
+              <td>${mode}</td>
+              <td>${age}</td>
+              <td>${region}</td>
+              <td id="cuoi">
+                <button type="button" class="chitiet" value="${id}">Chi tiết</button>
+                <button type="button" class="xoa" value="${id}" >Xóa</button>
+              </td>
+            </tr>
+                    `;
+          });
+
+          document.getElementById("data").innerHTML = data;
+          //Nút xóa
+          let buttonx = document.getElementsByClassName("xoa");
+          for (var i = 0; i < buttonx.length; i++) {
+            let buttonxoa = buttonx[i];
+            buttonxoa.onclick = () => {
+              var id = buttonxoa.value;
+              var xoama = confirm("Bạn có chắc xóa món ăn này không?");
+              if(xoama){
+              const header = {
+                headers: {
+                  'Accept': '*/*',
+                  'Content-Type': 'application/json',
+                  'token': token
+                },
+                method: "POST",
+                mode: "cors"
+              };
+              var url = `https://easycook37.herokuapp.com/deleteFood?id=${id}`
+              fetch(url, header)
+                .then(function (response) {
+                  return response.json();
+                })
+                .then(function (result) {
+                  console.log(result);
+                  window.location = `http://localhost:3000/dulieu?token=${token}&phone=${phone}`;
+                })
+                .catch(function (error) {
+                  console.log('Request failed', error);
+                });
+              }
+            }
+          }
+          //Nút chi tiết
+          let buttony = document.getElementsByClassName("chitiet");
+          for (var i = 0; i < buttony.length; i++) {
+            let buttonchitiet = buttony[i];
+            buttonchitiet.onclick = () => {
+              var id = buttonchitiet.value;
+              window.location = `http://localhost:3000/chitietdulieu?id=${id}&token=${token}&phone=${phone}`;
+            }
+          }
+        })
+        .catch(err => {
+          console.log('Error :-S', err)
+        });
+    }
+    loadData();
+
+
+
+    function thanhphan() {
+      window.location = `http://localhost:3000/thanhphan?token=${token}&phone=${phone}`;
+    }
+    function monan() {
+      window.location = `http://localhost:3000/dulieu?token=${token}&phone=${phone}`;
+    }
+    function themmoi(){
+      window.location = `http://localhost:3000/themmonan?token=${token}&phone=${phone}`;
+    }
+
+
+  </script>
+
+</body>
+
+</html>

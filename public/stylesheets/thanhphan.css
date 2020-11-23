@@ -1,0 +1,75 @@
+*{margin: 0;padding: 0;}
+html, body {width: 100%;height: 100%;}
+/* menu */
+nav.navbar.navbar-expand-lg.navbar-light.bg-light{
+    border-bottom: 1px solid gray ;
+    width: 100%;
+    height: 60px;
+
+    display: block;
+    position: fixed;
+    top: 0;
+
+}
+a.dropdown-item:hover {
+    background-color: cornsilk;
+}
+a.nav-link {
+    font-family: initial;
+    font-size: 23px;
+}
+a.nav-link:hover{
+    background-color: cornsilk;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+#nut{
+    width: 90px;
+    height: 45px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-left: 10px;
+    float: left;
+}
+
+/* Bảng */
+.bang{
+    width: 100%;
+    height: 100%;
+    margin-top: 80px;
+}
+
+
+.table-light{
+    width: 100%;
+    background-color:rgb(243, 236, 236);
+    height: 48,8px;
+    display: inline-block;
+}
+
+.table-light thead td{
+    
+    color: black;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    width: 12.5%;
+    text-align: center;
+}
+.table-light tbody td{
+    
+    color: black;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    width: 12.5%;
+    text-align: center;
+}
+.table-light tbody td button{
+    border: 1px solid rgb(167, 154, 154);
+    border-radius: 3px;
+    padding: 5px 10px;
+    
+}
+/* .table-light td p{
+    text-align: center;
+} */

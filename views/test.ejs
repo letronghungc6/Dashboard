@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="input_1" value="1">
+    <div class="mt-3" id="kq_input_1">ABC</div>
+    <button class="btn btn-outline-danger" onclick="readOnly()">Set Read only</button>
+    <div id="them_vao_day"></div>
+
+
+    <script type="text/javascript">
+        var input_1 = document.getElementById("input_1")
+        var value_input_1 = input_1.value
+        var div_input_1 = document.getElementById("kq_input_1")
+        div_input_1.innerHTML = value_input_1;
+
+        function readOnly() {
+            var input_1 = document.getElementById("input_1")
+            input_1.setAttribute("readonly", true)
+        }
+
+        var them_vao_day = document.getElementById("them_vao_day")
+        var h1 = document.createElement("h1")
+        h1.innerHTML = "Thẻ h1 vừa thêm vào"
+        them_vao_day.appendChild(h1)
+
+
+        function Person(name) {
+            this.name = name;
+        }
+        // RETURNS OBJECT
+        let myPerson = new Person("Greg");
+        console.log(myPerson); // Person { name: 'Greg' }
+    </script>
+</body>
+
+</html>

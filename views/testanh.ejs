@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+</head>
+
+<body>
+
+    <!-- <input type="text" id="idanh">
+    <button type="button" onclick="layanh()"></button> -->
+
+
+    <script>
+        function FlickrPhoto(title, owner, flickrURL, imageURL) {
+            this.title = title;
+            this.owner = owner;
+            this.flickrURL = flickrURL;
+            this.imageURL = imageURL;
+        }
+
+        function FlickrService() {
+            this.flickrApiKey = "865280953f08e24f6ceff3ce461e9bf2";
+            this.flickrGetInfoURL = "https://api.flickr.com/services/rest/?method=flickr.photos.getInfo&nojsoncallback=1&format=json";
+
+            this.getPhotoInfo = function (photoId, callback) {
+                var ajaxOptions = {
+                    type: 'GET',
+                    url: this.flickrGetInfoURL,
+                    data: { api_key: this.flickrApiKey, photo_id: photoId },
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.stat == "ok") {
+                            var photo = data.photo;
+                            var photoTitle = photo.title._content;
+                            var photoOwner = photo.owner.realname;
+                            var photoWebURL = photo.urls.url[0]._content;
+                            var photoStaticURL = "https://farm" + photo.farm + ".staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + "_b.jpg";
+                            var flickrPhoto = new FlickrPhoto(photoTitle, photoOwner, photoWebURL, photoStaticURL);
+                            callback(flickrPhoto);
+                        }
+                    }
+                };
+
+                $.ajax(ajaxOptions);
+            }
+        }
+        //190772570@N06
+        var photoId = "50521059207";
+        var flickrService = new FlickrService();
+        flickrService.getPhotoInfo(photoId, function (photo) {
+            console.log(photo.imageURL);
+            console.log(photo.owner);
+            console.log(photo.title);
+        });
+    
+    </script>
+
+
+
+    <!-- <script>
+
+    </script> -->
+</body>
+
+</html>

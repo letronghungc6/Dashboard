@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Chi tiết dữ liệu</title>
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="fa/css/all.css">
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="stylesheets/chitiet.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+
+        <li class="nav-item active">
+          <a class="nav-link" href="http://localhost:3000/">Trang chủ <span class="sr-only">(current)</span></a>
+          <!-- Sửa -->
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Nội dung
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <button type="button" class="dropdown-item" onclick="monan()">Món ăn</button>
+            <button type="button" class="dropdown-item" onclick="thanhphan()">Thành phần</button>
+          </div>
+        </li>
+        <input type="text" id="layid" name="layid" value="<%-id%>" style="display: none;">
+        <input type="text" id="token" name="token" value="<%-token%>" style="display: none;">
+        <input type="text" id="phone" name="phone" value="<%-phone%>" style="display: none;">
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Tìm kiếm" aria-label="Search">
+        <a href="/logout"><button class="btn btn-outline-success my-2 my-sm-0" type="button" id="logout" >Đăng
+          xuất</button></a>
+      </form>
+    </div>
+  </nav>
+  <div class="dulieu" id="data">
+    <!-- <div class="chitietdulieu">
+      <h1>Bắp cải xào tôm</h1>
+      <img src="/images/bapcaixaotomac.png" alt="bapcaixaotomac">
+      <h5>Món ăn bổ sung canxi</h5>
+      <table class="table table-light">
+        <thead>
+          <tr>
+            <td>Nguyên liệu chính</td>
+            <td>Tuổi</td>
+            <td>Vùng miền</td>
+            <td>Chế độ</td>
+            <td>Sự kiện</td>
+            <td>Thời gian</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Bắp cải, tôm</td>
+            <td>Mọi lứa tuổi</td>
+            <td>3 miền</td>
+            <td>Mặn</td>
+            <td></td>
+            <td>10 phút</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+    <div class="nguyenlieu">
+      <h2>Nguyên liệu & gia vị</h1>
+        <hr>
+        <div class="chitietnguyenlieu">
+          <p>Bắp cải 1/2 trái</p>
+          <p>Tôm đất 200g</p>
+          <p>Cà chua 1 quả</p>
+          <p>Hành lá</p>
+          <p>Hành tím</p>
+        </div>
+        <div class="chitietgiavi">
+          <p>Bột ngọt 1/2 muỗng</p>
+          <p>Hạt nêm 1/2 muỗng</p>
+          <p>Tiêu 1/2 muỗng</p>
+
+        </div>
+    </div>
+
+    <div class="cachnau">
+      <h2>Các bước nấu</h1>
+        <hr>
+        <p>Tôm rửa sạch bóc vỏ rút chỉ trên lưng</p>
+        <img src="images/bapcaixaotom1.png" alt="bapcaixaotom1">
+        <p>Bắp cải thái nhỏ sau đó rửa để ráo</p>
+        <img src="/images/bapcaixaotom2.png" alt="bapcaixaotom2">
+        <p>Bắp chảo lên phi thơm hành cho cà chua vào sau đó cho tôm vào xào qua sau đó cho bắp cải vào và nêm nếm gia
+          vị (7 phút)</p>
+        <img src="/images/bapcaixaotom3.png" alt="bapcaixaotom3">
+        <p>Thêm hành lá và tiêu là hoàn thành món bắp cải xào tôm</p>
+        <img src="/images/bapcaixaotom4.png" alt="bapcaixaotom4">
+    </div>
+
+    <hr>
+    <div class="suachitiet"> -->
+    <!-- <button>Sửa</button>
+  </div> -->
+  </div>
+
+
+  <script>
+    var id = document.getElementById("layid").value;
+    var token = document.getElementById("token").value;
+    var phone = document.getElementById("phone").value;
+    function loadData() {
+      var data = "";
+      var thanhphan = "";
+      var giavi = "";
+      var buocnau = "";
+      var anh="";
+      var tongtime=0;
+      const header = {
+        headers: {
+          'Accept': '*/*',
+          'Content-Type': 'application/json',
+          'token': token
+        },
+        method: "GET",
+        mode: "cors"
+      };
+      var url = `https://easycook37.herokuapp.com/homeFood/display?id=${id}`
+      fetch(url, header)
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (result) {
+
+          let name = result.data.name;
+          let imageFoods = result.data.imageFoods;
+          let description = result.data.description;
+          let components = result.data.components;
+          let age = result.data.age;
+          let region = result.data.region;
+          let mode = result.data.mode;
+          //laythanhphan
+          result.data.componentFoods.forEach(function (user) {
+            let nameComponent = user.name;
+            let numberOfComponent = user.numberOfComponent
+            thanhphan += `
+                  <p>${nameComponent} ${numberOfComponent} </p>
+              `
+          })
+          //laygiavi
+          result.data.spiceFoods.forEach(function (user) {
+            let nameSpice = user.name;
+            let numberOfSpice = user.numberOfSpice;
+            giavi += `
+                  <p>${nameSpice} ${numberOfSpice} </p>
+            `
+          })
+          //laybuocnau-tinhtime
+          result.data.steps.forEach(function (user) {
+            let descriptionStep = user.description;
+            let imageData=user.imageData;
+                anh=`
+                  <img src="${imageData}" alt="">
+                `
+            let time = user.time;
+            buocnau += `
+                  <p>${descriptionStep}  (Thời gian ${time} phút)</p>
+                  ${anh}  
+            `
+            anh="";
+            let intTime=parseInt(time);
+            tongtime+= intTime;
+          })
+          
+          
+          
+
+          data = `
+            <div class="chitietdulieu">
+      <h1>${name}</h1>
+      <img src="${imageFoods}" alt="">
+      <h5>${description}</h5>
+      <table class="table table-light">
+        <thead>
+          <tr>
+            <td>Nguyên liệu chính</td>
+            <td>Tuổi</td>
+            <td>Vùng miền</td>
+            <td>Chế độ</td>
+            <td>Thời gian</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>${components}</td>
+            <td>${age}</td>
+            <td>${region}</td>
+            <td>${mode}</td>
+            <td>${tongtime} phút</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nguyenlieu">
+      <h2>Nguyên liệu & gia vị</h1>
+        <hr>
+        <div class="chitietnguyenlieu">
+            ${thanhphan}
+        </div>
+        <div class="chitietgiavi">
+            ${giavi}
+        </div>
+    </div>
+
+    <div class="cachnau">
+      <h2>Các bước nấu</h1>
+        <hr>
+        ${buocnau}
+    </div>
+    <hr>
+    <div class="suachitiet"> 
+      <button type="button" onclick="suamonan()">Sửa</button>
+    </div>
+                    `;
+
+          document.getElementById("data").innerHTML = data;
+        })
+        .catch(err => {
+          console.log('Error :-S', err)
+        });
+    }
+
+    loadData();
+
+
+    function thanhphan() {
+      window.location = `http://localhost:3000/thanhphan?token=${token}&phone=${phone}`;
+    }
+    function monan() {
+      window.location = `http://localhost:3000/dulieu?token=${token}&phone=${phone}`;
+    }
+    function suamonan(){
+      window.location = `http://localhost:3000/suamonan?id=${id}&token=${token}&phone=${phone}`;
+    }
+  </script>
+
+
+</body>
+
+</html>

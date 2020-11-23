@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Nhập thành phần</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="fa/css/all.css">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <link rel="stylesheet" href="stylesheets/nhapthanhphan.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="http://localhost:3000/">Trang chủ <span
+                            class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Nội dung
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <button type="button" class="dropdown-item" onclick="monan()">Món ăn</button>
+                        <button type="button" class="dropdown-item" onclick="thanhphan()">Thành phần</button>
+                        <input type="text" id="token" name="token" value="<%-token%>" style="display: none;">
+                        <input type="text" id="phone" name="phone" value="<%-phone%>" style="display: none;">
+                    </div>
+                </li>
+
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Tìm kiếm" aria-label="Search">
+                <a href="/logout"><button class="btn btn-outline-success my-2 my-sm-0" type="button" id="logout">Đăng
+                        xuất</button></a>
+            </form>
+        </div>
+    </nav>
+    <!-- Form -->
+    <div class="form">
+        <form method="" action="" name="postthanhphan" id="postData">
+            <div class="inp">
+                <input type="text" name="ttphanchinh" id="ttphanchinh" placeholder="Tên thành phần chính">
+            </div>
+            <input type="radio" name="loai" id="thit" value="Thịt">
+            <label for="loai">Thịt</label>
+            <br>
+            <input type="radio" name="loai" id="haisan" value="Hải sản">
+            <label for="loai">Hải sản</label>
+            <br>
+            <input type="radio" name="loai" id="rau" value="Rau củ quả">
+            <label for="loai">Rau, củ, quả</label>
+            <br>
+
+            <div class="inp">
+                <input type="text" name="thanhphan" id="thanhphan" placeholder="Nhập thành phần phụ ở đây">
+                <br>
+                <button type="button" class="themmodal" onclick="themtphan()" style="margin-bottom:10px;">Thêm
+                    thành phần</button>
+                <div id="them">
+                </div>
+                <button type="button" onclick="xoacuoi()">Xóa</button>
+
+            </div>
+
+            <br>
+            <!-- <label for="anh">Ảnh: </label>
+            <input type="file" name="anh" id="anh"> -->
+            <div class="inp">
+                <input type="text" id="idanh" name="idanh" placeholder="Nhập id ảnh ở đây">
+                <br>
+                <button type="button" onclick="laylink()">Chọn ảnh</button></div>
+            <!-- <button type="button" onclick="layanh()">Thêm ảnh</button> -->
+            <br>
+            <div class="inp">
+                <input type="text" id="linkanh" style="display: none;">
+                <div id="anh"></div>
+            </div>
+
+            <br>
+
+            <button type="submit" name="submit">Thêm</button>
+            <button type="button" onclick="kiemtra()">Kiểm tra</button>
+            <div id="modal" class="modal">
+                        <div class="modal-content">
+                                <form action="#">   
+                                        <div id=mess></div>
+                        <!-- <button id="close" onclick="close()" >Đóng</button> -->
+                               </form>
+                       </div>
+            </div>
+        </form>
+
+        
+    </div>
+    
+
+
+    <script>
+        var descriptionList = [];
+        var list = "";
+
+
+        /////////////////////Nút thêm thành phần
+        function themtphan() {
+            var them = document.getElementById("them");
+            var a = document.getElementById("thanhphan");
+            var value_a = a.value;
+            // console.log(value_a);
+            //tạo thẻ mới 
+            var p = document.createElement("p");
+            //tạo thuộc tính
+            var att = document.createAttribute("name");
+            var val = document.createAttribute("value");
+            //gán giá trị cho thuộc tính đó
+            att.value = "tphan";
+            val.value = value_a;
+            //gán id cho thẻ đó
+            p.setAttributeNode(att);
+            p.setAttributeNode(val);
+            p.innerHTML = value_a;
+            //thêm p vào cuối tại thẻ có id them
+            them.appendChild(p);
+            //thêm giá trị vào cuối mảng
+            descriptionList.push(value_a);
+            document.getElementById("thanhphan").select();
+        }
+        ////////////////////////////Xóa
+        function xoacuoi() {
+            var list = "";
+            descriptionList.pop();
+            descriptionList.forEach(function (user) {
+                list += `
+                            <p name="tphan" value="${user}">${user}</p>
+                        `
+            })
+            document.getElementById("them").innerHTML = list
+        }
+
+        function createIngredientMainFood(name, imageData, type, descriptionList) {
+            this.name = name;
+            this.imageData = imageData;
+            this.type = type;
+            this.descriptionList = descriptionList;
+        }
+
+        ///////////////////////fetch api
+        document.getElementById('postData').addEventListener('submit', check);
+        function check(event) {
+            event.preventDefault();
+            var name = document.getElementById("ttphanchinh").value;
+            // imageData=document.getElementById("linkanh").value;
+            var loai = document.getElementsByName("loai");
+            var imageData = document.getElementById("linkanh").value;
+            var token = document.getElementById("token").value;
+            var type = "";
+            for (var i = 0; i < loai.length; i++) {
+                if (loai[i].checked === true) {
+                    type = loai[i].value;
+                    break;
+                }
+            }
+            const data = {
+                "name": name,
+                "type": type,
+                "image": imageData,
+                "descriptionList": descriptionList
+            };
+            const header = {
+                headers: {
+                    'Accept': '*/*',
+                    'Content-Type': 'application/json',
+                    'token': token
+                },
+                body: JSON.stringify(data),
+                method: "POST",
+                mode: "cors"
+            };
+
+            fetch("https://easycook37.herokuapp.com/pushIngredient", header)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (result) {
+                    console.log(result);
+                    window.location = `http://localhost:3000/thanhphan?token=${token}&phone=${phone}`;
+                })
+                .catch(function (error) {
+                    console.log('Request failed', error);
+                });
+
+        }
+        ////////////////////////Kiểm tra, xử lí modal
+        var modal = document.getElementById("modal");
+        function kiemtra() {
+            modal.style.display = "block";
+            var photoId = document.getElementById("idanh").value;
+            var name = document.getElementById("ttphanchinh").value;
+            // imageData=document.getElementById("linkanh").value;
+            var loai = document.getElementsByName("loai");
+            var imageData = document.getElementById("linkanh").value;
+            var type = "";
+            for (var i = 0; i < loai.length; i++) {
+                if (loai[i].checked === true) {
+                    type = loai[i].value;
+                    console.log(type);
+                    break;
+                }
+            }
+            var x = new createIngredientMainFood(name, imageData, type, descriptionList);
+            var output = "Tên thành phần chính: " + name + "\nLoại: " + type + "\nDanh sách thành phần: " + descriptionList + "\nẢnh: " + imageData;
+            // alert(output);
+            var mess = `
+                <p>Tên thành phần chính: ${name}<p>
+                <p>Loại: ${type}<p>
+                <p>Thành phần phụ: ${descriptionList}<p>
+                <img src="${imageData}" alt="" width="200px" height="200px"> 
+            `
+            document.getElementById("mess").innerHTML = mess;
+        }
+        // function close() {
+        //     modal.style.display = "none";
+        // }
+
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+
+
+        /////////////////////////Xử lí ảnh
+        function FlickrPhoto(title, owner, flickrURL, imageURL) {
+            this.title = title;
+            this.owner = owner;
+            this.flickrURL = flickrURL;
+            this.imageURL = imageURL;
+        }
+        function FlickrService() {
+            this.flickrApiKey = "865280953f08e24f6ceff3ce461e9bf2";
+            this.flickrGetInfoURL = "https://api.flickr.com/services/rest/?method=flickr.photos.getInfo&nojsoncallback=1&format=json";
+
+            this.getPhotoInfo = function (photoId, callback) {
+                var ajaxOptions = {
+                    type: 'GET',
+                    url: this.flickrGetInfoURL,
+                    data: { api_key: this.flickrApiKey, photo_id: photoId },
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.stat == "ok") {
+                            var photo = data.photo;
+                            var photoTitle = photo.title._content;
+                            var photoOwner = photo.owner.realname;
+                            var photoWebURL = photo.urls.url[0]._content;
+                            var photoStaticURL = "https://farm" + photo.farm + ".staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + "_b.jpg";
+                            var flickrPhoto = new FlickrPhoto(photoTitle, photoOwner, photoWebURL, photoStaticURL);
+                            callback(flickrPhoto);
+                        }
+                    }
+                };
+
+                $.ajax(ajaxOptions);
+            }
+        }
+        function laylink() {
+            var photoId = document.getElementById("idanh").value;
+            var flickrService = new FlickrService();
+            flickrService.getPhotoInfo(photoId, function (photo) {
+                var linkanh = photo.imageURL;
+                document.getElementById("linkanh").value = linkanh;
+                var anh = `
+                 <img src="${linkanh}" alt="" width="200px" height="200px"> 
+                `;
+                document.getElementById("anh").innerHTML = anh;
+            });
+
+        }
+        var token = document.getElementById("token").value;
+        var phone = document.getElementById("phone").value;
+
+
+
+
+        function thanhphan() {
+            window.location = `http://localhost:3000/thanhphan?token=${token}&phone=${phone}`;
+            // console.log(token);
+        }
+        function monan() {
+            window.location = `http://localhost:3000/dulieu?token=${token}&phone=${phone}`;
+        }
+
+
+    </script>
+</body>
+
+</html>

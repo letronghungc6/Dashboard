@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Login</title>
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="fa/css/all.css">
+
+  <link rel="stylesheet" href="stylesheets/login.css">
+</head>
+
+<body>
+
+  <div class="formCont">
+    <div class="brTop"></div>
+    <form id="postData">
+
+      <div class="inputForm">
+        <span class="prefix"><span class="entypo-user"></span></span>
+        <input type="text" id="phone" name="phone" placeholder="Số điện thoại" />
+      </div>
+      <br />
+      <div class="inputForm">
+        <span class="prefix"><span class="entypo-key"></span></span>
+        <input type="password" id="password" name="password" placeholder="Mật khẩu" />
+        <span class="sufix"><span class="entypo-lock"></span></span>
+      </div>
+      <div class="triangle"></div>
+      <!-- <span id='message'></span> -->
+      <a href="dulieu1.ejs"><button type="submit" name="Submit" class="btn">Đăng nhập</button></a>
+
+  </div>
+  </form>
+
+  <script>
+    document.getElementById('postData').addEventListener('submit', check);
+    function check(event) {
+      event.preventDefault();
+      // document.getElementById('message').innerHTML = "checking";
+      const data = {
+        'phone': document.getElementById('phone').value,
+        'password': document.getElementById('password').value
+      };
+
+      const header = {
+        headers: {
+          // 'Accept': 'application/json', 'content-type': 'application/json; charset=UTF-8'
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+
+        },
+        body: JSON.stringify(data),
+        method: "POST",
+        mode: "cors"
+      };
+
+      fetch("https://easycook37.herokuapp.com/login", header)
+        // .then(res => res.json())
+        // .then(data => document.getElementById("message").innerHTML = data.encoded)
+        // .catch(error => document.getElementById("message").innerHTML = error.message);
+
+        // .then(function(res){ console.log(res) })
+        // .catch(function(res){ console.log(res) })
+
+        // const content = await rawResponse.json();
+        // console.log(content);
+        // .then(function(res){ return res.json(); })
+        // .then(function(data){ alert( JSON.stringify( data ) ) })
+
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (result) {
+          let token = result.token.token;
+          let phone=result.Data.phone;
+           window.location=`http://localhost:3000/dulieu?token=${token}&phone=${phone}`;      
+        })
+        .catch(function (error) {
+          console.log('Request failed', error);
+          alert("Sai tài khoản hoặc mật khẩu");
+        });
+        }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,292 @@
+*{margin: 0;padding: 0;}
+html, body {width: 100%;height: 100%;}
+
+/* Phân trang */
+/* .pagination {
+    padding-left: 20px;
+    width:18%;
+    float: left;
+} */
+
+/* menu */
+nav.navbar.navbar-expand-lg.navbar-light.bg-light{
+    border-bottom: 1px solid gray ;
+    width: 100%;
+    height: 60px;
+    display: block;
+    position: fixed;
+    top: 0;
+}
+a.dropdown-item:hover {
+    background-color: cornsilk;
+}
+a.nav-link {
+    font-family: initial;
+    font-size: 23px;
+}
+a.nav-link:hover{
+    background-color: cornsilk;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+#nut{
+    width: 90px;
+    height: 45px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-left: 10px;
+    float: left;
+}
+
+#cuoi button{
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: 5px 5px;
+}
+
+.page {
+    /* display: inline; */
+    padding: 0px 9px;
+    margin-right: 4px;
+    border-radius: 3px;
+    border: solid 1px #c0c0c0;
+    background: #e9e9e9;
+    /* box-shadow: inset 0px 1px 0px rgba(255,255,255, .8), 0px 1px 3px rgba(0,0,0, .1); */
+    font-size: .875em;
+    font-weight: bold;
+    text-decoration: none;
+    color: #717171;
+    /* text-shadow: 0px 1px 0px rgba(255,255,255, 1); */
+}
+ 
+.page.active {
+    border: none;
+    background: #616161;
+    box-shadow: inset 0px 0px 8px rgba(0,0,0, .5), 0px 1px 0px rgba(255,255,255, .8);
+    color: #f0f0f0;
+    text-shadow: 0px 0px 3px rgba(0,0,0, .5);
+}
+/* 
+.demdata{
+    border: solid 1px #c0c0c0;
+    width: 40px;
+    height: 25px;
+    float: left;
+    border-radius: 3px;
+    font-size: .875em;
+    font-weight: bold;
+    text-decoration: none;
+    color: #717171;
+    background: #e9e9e9;
+    text-align: center;
+} */
+#container{
+    width: 100%;
+    height: 100%;
+    margin-top: 80px;
+}
+
+.table-light{
+    width: 100%;
+    background-color:rgb(243, 236, 236);
+    height: 48,8px;
+    display: inline-block;
+}
+
+.table-light td{
+    
+    color: black;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    width: 12.5%;
+    text-align: center;
+
+}
+table-light td p{
+    text-align: center;
+}
+/* .table-light td:hover { 
+    overflow: visible;
+    white-space: pre-line;
+    width: 500px;
+} */
+/* .table-light thead{
+    width: 100%;
+}
+.table-light tbody{
+    width: 100%;
+} */
+/* .table-light thead td{
+    max-width: 12%;
+    overflow: hidden;
+    text-align: center;
+}
+.table-light tbody td{
+    white-space: nowrap; 
+    max-width: 12%;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    text-align: center;
+} */
+/* .table1{
+    width: 100%;
+    background-color:rgb(243, 236, 236);
+}
+.table1 td{
+    width: 12.857%;
+    color: black;
+    overflow: hidden;
+} */
+#updatenhap{
+    width: 130px;
+    height: 50px;
+    margin-left: 10px;
+    margin-top:20px;
+    border-radius: 3px;
+}
+#updatenhap:hover{
+    background-color: darkgray;
+}
+.nutchucnang p{
+    font-size:15px;
+}
+.table-light2{
+    margin-top: 200px;
+    width: 100%;
+    background-color:rgb(243, 236, 236);
+    height: 48,8px;
+}
+.table-light2 td{
+    height: 48,8px;
+    color: black;
+    overflow: hidden;
+    text-align: center;
+}
+.nhap{
+    text-align: center;
+    height:100px ;
+    overflow: hidden;
+    color: black;
+   border-radius: 3px;
+   margin-left: 1%;
+   text-overflow: ellipsis;
+}
+.nhap2{
+    float: left;
+    height:37%;
+    width: 24%;
+    overflow: hidden;
+    color: black;
+    border-radius: 3px;
+    margin-left: 1%;
+}
+.form-group{
+    margin-left: 40px;
+    width: 150px;
+    float: left;
+}
+
+/*chatbox*/
+.chatbox{
+    height: 679px;
+    width: 100%;
+    min-width: 60%;
+    background: #fff;
+    padding: 25px;
+    margin: 20px auto;
+    box-shadow: 0 3px #ccc;
+}
+.chatlogs{
+    padding: 10px;
+    width: 100%;
+    height: 500px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+.chat-form textarea::-webkit-scrollbar{
+    width: 10px;
+
+}
+.chat-form textarea::-webkit-scrollbar-thumb{
+    border-radius: 5px;
+    background: rgba(0,0,0,.1);
+}
+.chat{
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+.chat .user-photo{
+    width: 60px;
+    height: 60px;
+    background: #ccc;
+    border-radius: 50%;
+}
+.chat .chat-message{
+    width: 90%;
+    height: 52px;
+    padding: 15px;
+    margin: 5px 10px 0;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 20px;
+}
+.friend .chat-message{
+    background: #1adda4;
+
+}
+.self .chat-message{
+    background: #1cdced;
+    order: -1;
+}
+.chat-form{
+    margin-top: 10px;
+    display: flex;
+    align-items: flex-start;
+
+
+}
+.chat-form textarea{
+    background: #fbfbfb;
+    width: 85%;
+    height: 80px;
+    border: 2px solid #eee;
+    border-radius: 3px;
+    resize: none;
+    padding: 10px;
+    font-size: 20px;
+    color: #333;
+}
+.chat-form textarea:focus{
+    background: #fff;
+}
+.chat-form button{
+    width: 130px;
+    height: 80px;
+    background: #1ddced;
+    padding: 5px 15px;
+    font-size: 30px;
+    color: #fff;
+    border:none;
+    margin: 0 10px;
+    border-radius: 3px;
+    box-shadow: 0 3px #0eb2c1;
+    cursor: pointer;
+    -webkit-transition: background .2s ease;
+    -moz-transition:  background .2s ease;
+    -o-transition:  background .2s ease;;
+}
+.chat-form button:hover{
+    background: #13c8d9;
+}
+.container{
+    width: 100%;
+    height: 100%;
+}
+#data{
+    width: 100%;
+    height: 100%;
+}

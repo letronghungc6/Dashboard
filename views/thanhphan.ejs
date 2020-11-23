@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Thành phần</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="fa/css/all.css">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <link rel="stylesheet" href="stylesheets/thanhphan.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Trang chủ <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Nội dung
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <button type="button" class="dropdown-item" onclick="monan()">Món ăn</button>
+                        <button type="button" class="dropdown-item" onclick="thanhphan()">Thành phần</button>
+                        <input type="text" id="token" name="token" value="<%-token%>" style="display: none;">
+                        <input type="text" id="phone" name="phone" value="<%-phone%>" style="display: none;">
+                    </div>
+                </li>
+                <button id="nut" onclick="themmoi()">Thêm mới</button>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Tìm kiếm" aria-label="Search">
+                <a href="/logout"><button class="btn btn-outline-success my-2 my-sm-0" type="button" id="logout" >Đăng
+                    xuất</button></a>
+            </form>
+        </div>
+    </nav>
+
+    <div class="bang">
+        <table class="table table-light">
+            <thead>
+                <tr>
+                    <td><strong>Tên thành phần chính</strong></td>
+                    <td><strong>Loại</strong></td>
+                    <td><strong>Phân loại thành phần</strong></td>
+                    <td><strong>Ảnh</strong></td>
+                    <td><strong>Chức năng</strong></td>
+                </tr>
+            </thead>
+            <tbody id="data">
+                <!-- <tr>
+                      <td>Thịt gà</td>
+                      <td>Thịt</td>
+                      <td>
+                          <p>Đầu gà</p>
+                          <p>Cổ gà</p>
+                          <p>Cánh gà</p>
+                      </td>
+                      <td><img src="https://farm66.staticflickr.com/65535/50533767056_86a09ceb69_b.jpg" alt="Thịt gà"></td>
+                    </tr> -->
+
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+    <script>
+
+        var token = document.getElementById("token").value;
+        var phone = document.getElementById("phone").value;
+        function thanhphan() {
+            window.location = `http://localhost:3000/thanhphan?token=${token}&phone=${phone}`;
+            // console.log(token);
+        }
+        function monan() {
+            window.location = `http://localhost:3000/dulieu?token=${token}&phone=${phone}`;
+        }
+        function themmoi() {
+            window.location = `http://localhost:3000/nhapthanhphan?token=${token}&phone=${phone}`;
+        }
+        function loadData() {
+            var data = "";
+            const header = {
+                headers: {
+                    'Accept': '*/*',
+                    'Content-Type': 'application/json',
+                    'token': token
+                },
+                method: "GET",
+                mode: "cors"
+            };
+            fetch("https://easycook37.herokuapp.com/homeIngredient", header)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (result) {
+                    result.data.forEach(function (user) {
+
+                        let name = user.name;
+                        let type = user.type;
+                        let image = user.image;
+                        
+                        let descriptionList = user.descriptionList;
+                        let id = user.id;
+                        // user.descriptionList.forEach(function(element){
+
+                        //     list+=`
+                        //         <p>${element}</p>
+                        //     `
+                        // })
+                        data += `
+                    <tr>
+                      <td>${name}</td>
+                      <td>${type}</td>
+                      <td>
+                          ${descriptionList}
+                      </td>
+                      <td><img src="${image}" alt="${name}" width="200px" height="200px"></td>
+                      <td> 
+                        <button type="button" name="sua" class="sua" value="${id}">Sửa</button>
+                        <button type="button" name="xoa" class="xoa" value="${id}"  >Xóa</button>
+                        </td>
+                    </tr>
+                    `;
+                    });
+                    document.getElementById("data").innerHTML = data;
+                    //Xóa
+                    let buttonx = document.getElementsByClassName("xoa");
+                    for (var i = 0; i < buttonx.length; i++) {
+                        let buttonxoa = buttonx[i];
+                        buttonxoa.onclick = () => {
+                            var id = buttonxoa.value;
+                            var xoatp = confirm("Bạn có chắc xóa thành phần này không?");
+                            if(xoatp){
+                                const header = {
+                                headers: {
+                                    'Accept': '*/*',
+                                    'Content-Type': 'application/json',
+                                    'token': token
+                                },
+                                method: "POST",
+                                mode: "cors"
+                            };
+                            var url = `https://easycook37.herokuapp.com/deleteIngredient?id=${id}`
+                            fetch(url, header)
+                                .then(function (response) {
+                                    return response.json();
+                                })
+                                .then(function (result) {
+                                    console.log(result);
+                                    window.location = `http://localhost:3000/thanhphan?token=${token}&phone=${phone}`;
+                                })
+                                .catch(function (error) {
+                                    console.log('Request failed', error);
+                                });
+                            }
+                            // const header = {
+                            //     headers: {
+                            //         'Accept': '*/*',
+                            //         'Content-Type': 'application/json',
+                            //         'token': token
+                            //     },
+                            //     method: "POST",
+                            //     mode: "cors"
+                            // };
+                            // var url = `https://easycook37.herokuapp.com/deleteIngredient?id=${id}`
+                            // fetch(url, header)
+                            //     .then(function (response) {
+                            //         return response.json();
+                            //     })
+                            //     .then(function (result) {
+                            //         console.log(result);
+                            //         window.location = `http://localhost:3000/thanhphan?token=${token}&phone=${phone}`;
+                            //     })
+                            //     .catch(function (error) {
+                            //         console.log('Request failed', error);
+                            //     });
+                        }
+                    }
+                    //Sửa
+                    let buttony = document.getElementsByClassName("sua");
+                    for (var i = 0; i < buttony.length; i++) {
+                        let buttonsua = buttony[i];
+                        buttonsua.onclick = () => {
+                            var id = buttonsua.value;
+                            window.location = `http://localhost:3000/suathanhphan?id=${id}&token=${token}&phone=${phone}`;
+                        }
+                    }
+                })
+                .catch(err => {
+                    console.log('Error :-S', err)
+                });
+        }
+        loadData();
+
+
+
+    </script>
+
+
+
+</body>
+
+
+
+</html>
